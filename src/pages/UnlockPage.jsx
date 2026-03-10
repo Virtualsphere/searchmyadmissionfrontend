@@ -31,7 +31,11 @@ export default function UnlockPage() {
 
     localStorage.setItem(`paid_${course}`, "true");
 
-    window.location.href = `/${course}`;
+    if(course=="llb"){
+      window.location.href = `/`;
+    }else{
+      window.location.href = `/${course}`;
+    }
   };
 
   return (

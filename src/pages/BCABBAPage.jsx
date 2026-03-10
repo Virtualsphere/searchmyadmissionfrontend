@@ -69,7 +69,7 @@ export default function BCABBAPage() {
   };
 
   useEffect(() => {
-    const paid = localStorage.getItem("paid_bca_bba");
+    const paid = localStorage.getItem("paid_bca/bba");
   
       if (paid === "true") {
         setIsPaid(true);
@@ -314,7 +314,7 @@ export default function BCABBAPage() {
             </p>
 
             <button
-              onClick={() => window.location.href="/unlock?course=bca_bba"}
+              onClick={() => window.location.href="/unlock?course=bca/bba"}
               className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-xl hover:scale-105 transition"
             >
               Unlock Full Report
