@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [mobileMenu, setMobileMenu] = useState(false);
 
   const toggleDropdown = (menu) => {
     setOpenDropdown(openDropdown === menu ? null : menu);
@@ -11,7 +12,6 @@ export default function Header() {
 
   return (
     <header className="w-full bg-white shadow-sm">
-
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
         {/* LOGO */}
@@ -23,9 +23,8 @@ export default function Header() {
           />
         </div>
 
-        {/* NAVIGATION */}
+        {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-8 font-medium text-gray-700">
-
           <a href="https://searchmyadmission.com/" className="hover:text-blue-600">Home</a>
           <a href="https://searchmyadmission.com/about/" className="hover:text-blue-600">About</a>
 
@@ -40,20 +39,14 @@ export default function Header() {
 
             {openDropdown === "online" && (
               <div className="absolute top-8 left-0 bg-white shadow-lg rounded-lg p-4 w-48">
-                <a href="https://searchmyadmission.com/online-courses/" className="block py-2 hover:text-blue-600">
-                  Online Courses
-                </a>
-                <a href="https://searchmyadmission.com/online-mba-specializations/" className="block py-2 hover:text-blue-600">
-                  Online MBA Specializations
-                </a>
-                <a href="https://searchmyadmission.com/online-mba-colleges/" className="block py-2 hover:text-blue-600">
-                  Online MBA Colleges
-                </a>
+                <a href="https://searchmyadmission.com/online-courses/" className="block py-2 hover:text-blue-600">Online Courses</a>
+                <a href="https://searchmyadmission.com/online-mba-specializations/" className="block py-2 hover:text-blue-600">Online MBA Specializations</a>
+                <a href="https://searchmyadmission.com/online-mba-colleges/" className="block py-2 hover:text-blue-600">Online MBA Colleges</a>
               </div>
             )}
           </div>
 
-          {/* COUNSELLING INTELLIGENCE */}
+          {/* COUNSELLING */}
           <div className="relative">
             <button
               onClick={() => toggleDropdown("counselling")}
@@ -65,13 +58,13 @@ export default function Header() {
             {openDropdown === "counselling" && (
               <div className="absolute top-8 left-0 bg-white shadow-lg rounded-lg p-4 w-56">
                 <a href="/" className="block py-2 hover:text-blue-600">
-                  GGSIPU LLB Counselling College Predictor 2026
+                  GGSIPU LLB Predictor
                 </a>
                 <a href="/bca/bba" className="block py-2 hover:text-blue-600">
-                  GGSIPU CET Counselling College Predictor 2026
+                  GGSIPU CET Predictor
                 </a>
                 <a href="/btech" className="block py-2 hover:text-blue-600">
-                  AKTU BTech Counselling College Predictor 2026
+                  AKTU BTech Predictor
                 </a>
               </div>
             )}
@@ -80,27 +73,92 @@ export default function Header() {
           <a href="https://searchmyadmission.com/top-colleges-in-delhi-ncr-direct-admission/" className="hover:text-blue-600">Top Colleges</a>
           <a href="https://searchmyadmission.com/direct-admission/" className="hover:text-blue-600">Direct Admission</a>
           <a href="https://searchmyadmission.com/blog/" className="hover:text-blue-600">Blog</a>
-
         </nav>
 
-        {/* SOCIAL ICONS */}
-        <div className="flex items-center gap-4 text-blue-600 text-lg">
-
+        {/* SOCIAL ICONS (DESKTOP) */}
+        <div className="hidden md:flex items-center gap-4 text-blue-600 text-lg">
           <a href="https://www.facebook.com/searchmyadmission">
             <FaFacebook className="hover:scale-110 transition" />
           </a>
-
           <a href="https://www.instagram.com/searchmyadmission">
             <FaInstagram className="hover:scale-110 transition" />
           </a>
-
           <a href="https://www.linkedin.com/company/search-my-admission/">
             <FaLinkedin className="hover:scale-110 transition" />
           </a>
-
         </div>
 
+        {/* MOBILE MENU BUTTON */}
+        <button
+          className="md:hidden"
+          onClick={() => setMobileMenu(!mobileMenu)}
+        >
+          {mobileMenu ? <X size={28} /> : <Menu size={28} />}
+        </button>
       </div>
+
+      {/* MOBILE MENU */}
+      {mobileMenu && (
+        <div className="md:hidden px-6 pb-6 space-y-4 font-medium text-gray-700">
+
+          <a href="https://searchmyadmission.com/" className="block">Home</a>
+          <a href="https://searchmyadmission.com/about/" className="block">About</a>
+
+          {/* MOBILE ONLINE UNIVERSITIES */}
+          <div>
+            <button
+              onClick={() => toggleDropdown("online")}
+              className="flex items-center justify-between w-full"
+            >
+              Online Universities <ChevronDown size={16} />
+            </button>
+
+            {openDropdown === "online" && (
+              <div className="pl-4 mt-2 space-y-2">
+                <a href="https://searchmyadmission.com/online-courses/" className="block">Online Courses</a>
+                <a href="https://searchmyadmission.com/online-mba-specializations/" className="block">Online MBA Specializations</a>
+                <a href="https://searchmyadmission.com/online-mba-colleges/" className="block">Online MBA Colleges</a>
+              </div>
+            )}
+          </div>
+
+          {/* MOBILE COUNSELLING */}
+          <div>
+            <button
+              onClick={() => toggleDropdown("counselling")}
+              className="flex items-center justify-between w-full"
+            >
+              Counselling Intelligence <ChevronDown size={16} />
+            </button>
+
+            {openDropdown === "counselling" && (
+              <div className="pl-4 mt-2 space-y-2">
+                <a href="/">GGSIPU LLB Predictor</a>
+                <a href="/bca/bba">GGSIPU CET Predictor</a>
+                <a href="/btech">AKTU BTech Predictor</a>
+              </div>
+            )}
+          </div>
+
+          <a href="https://searchmyadmission.com/top-colleges-in-delhi-ncr-direct-admission/" className="block">Top Colleges</a>
+          <a href="https://searchmyadmission.com/direct-admission/" className="block">Direct Admission</a>
+          <a href="https://searchmyadmission.com/blog/" className="block">Blog</a>
+
+          {/* SOCIAL ICONS MOBILE */}
+          <div className="flex gap-4 pt-4 text-blue-600 text-xl">
+            <a href="https://www.facebook.com/searchmyadmission">
+              <FaFacebook className="hover:scale-110 transition" />
+            </a>
+            <a href="https://www.instagram.com/searchmyadmission">
+              <FaInstagram className="hover:scale-110 transition" />
+            </a>
+            <a href="https://www.linkedin.com/company/search-my-admission/">
+              <FaLinkedin className="hover:scale-110 transition" />
+            </a>
+          </div>
+
+        </div>
+      )}
     </header>
   );
 }
