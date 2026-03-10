@@ -89,7 +89,7 @@ export default function BTECHPage() {
 
     try {
 
-      const res = await fetch(`http://localhost:5000/api/btech`, {
+      const res = await fetch(`${BASE_URL}/api/btech`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

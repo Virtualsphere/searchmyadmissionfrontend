@@ -88,7 +88,7 @@ export default function LLBPage() {
 
     try {
 
-      const res = await fetch(`http://localhost:5000/api/llb`, {
+      const res = await fetch(`${BASE_URL}/api/llb`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

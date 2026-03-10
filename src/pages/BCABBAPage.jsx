@@ -91,9 +91,9 @@ export default function BCABBAPage() {
       let endpoint = "";
 
       if (course === "Bachelor of Computer Applications") {
-        endpoint = `http://localhost:5000/api/bca`;
+        endpoint = `${BASE_URL}/api/bca`;
       } else if (course === "Bachelor of Business Administration") {
-        endpoint = `http://localhost:5000/api/bba`;
+        endpoint = `${BASE_URL}/api/bba`;
       }
 
       const res = await fetch(endpoint, {
