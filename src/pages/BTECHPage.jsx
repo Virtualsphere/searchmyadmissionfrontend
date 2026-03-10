@@ -193,11 +193,18 @@ export default function BTECHPage() {
                 onChange={(e)=>setCategory(e.target.value)}
                 className="w-full mt-2 p-3 rounded-xl bg-white/10 border border-white/20 focus:ring-2 focus:ring-teal-400"
               >
-                <option className="text-black" value="OPEN">OPEN</option>
+                <option className="text-black" value="OPEN(All India)">OPEN(All India)</option>
+                <option className="text-black" value="OPEN(Home State)">OPEN(Home State)</option>
+                <option className="text-black" value="OPEN(Girl)">OPEN(Girl)</option>
                 <option className="text-black" value="OPEN(TF)">OPEN (TF)</option>
-                <option className="text-black" value="OBC">OBC</option>
+                <option className="text-black" value="BC">BC</option>
+                <option className="text-black" value="BC(Girl)">BC(Girl)</option>
+                <option className="text-black" value="EWS">EVS</option>
+                <option className="text-black" value="EWS(Girl)">EWS(Girl)</option>
                 <option className="text-black" value="SC">SC</option>
+                <option className="text-black" value="SC(Girl)">SC(Girl)</option>
                 <option className="text-black" value="ST">ST</option>
+                <option className="text-black" value="ST(Girl)">ST(Girl)</option>
               </select>
             </div>
 
