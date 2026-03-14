@@ -262,6 +262,14 @@ export default function LLBPage() {
                       Rank {college.minRank} - {college.maxRank}
                     </span>
 
+                    <span className="bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full">
+                      {college.category}
+                    </span>
+
+                    <span className="bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full">
+                      {college.region}
+                    </span>
+
                   </div>
 
                 </div>

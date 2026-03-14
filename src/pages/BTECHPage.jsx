@@ -282,6 +282,10 @@ export default function BTECHPage() {
                       Rank {college.openingRank} - {college.closingRank}
                     </span>
 
+                    <span className="bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full">
+                      {college.round}
+                    </span>
+
                   </div>
 
                 </div>
