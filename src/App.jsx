@@ -8,6 +8,7 @@ import BTECHPage from './pages/BTECHPage'
 import Header from './component/Header'
 import Footer from './component/Footer'
 import UnlockPage from './pages/UnlockPage'
+import Predictor from './pages/Predictor'
 import './App.css'
 
 function App() {
@@ -15,9 +16,7 @@ function App() {
     <BrowserRouter>
     <Header />
       <Routes>
-        <Route path='/' element={<LLBPage />} />
-        <Route path='/bca/bba' element={<BCABBAPage />} />
-        <Route path='/btech' element={<BTECHPage />} />
+        <Route path='/' element={<Predictor />} />
         <Route path='/unlock' element={<UnlockPage />} />
       </Routes>
     <Footer />

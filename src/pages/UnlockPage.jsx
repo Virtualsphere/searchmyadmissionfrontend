@@ -1,86 +1,69 @@
-import { Search, Lock } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
+import { BASE_URL } from "../url/BaseUrl";
+import { useState } from "react";
 
-export default function UnlockPage() {
-    const [params] = useSearchParams();
-  const course = params.get("course");
+export default function Unlock() {
+
+  const [params] = useSearchParams();
+  const [loading, setLoading] = useState(false);
+
   const handlePayment = async () => {
 
-    // const res = await fetch("http://localhost:5000/create-order", {
-    //   method: "POST"
-    // });
+    setLoading(true);
 
-    // const data = await res.json();
+    try {
+      const res = await fetch(`${BASE_URL}/api/payment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: params.get("email"),
+          exam: params.get("exam"),
+          course: params.get("course"),
+          rank: Number(params.get("rank")),
+          region: params.get("region"),
+          category: params.get("category"),
+          payment: true
+        })
+      });
 
-    // const options = {
-    // //   key: "RAZORPAY_KEY",
-    // //   amount: data.amount,
-    // //   currency: "INR",
-    // //   name: "LLB Predictor",
-    // //   description: "Unlock Full College Report",
-    // //   order_id: data.id,
+      const data = await res.json();
 
-    //   handler: function () {
-    //     localStorage.setItem("paidUser", "true");
-    //     window.location.href = "/";
-    //   }
-    // };
+      if (data.success) {
+        window.location.href = "/";
+      } else {
+        alert("Payment failed");
+      }
 
-    // const rzp = new window.Razorpay(options);
-    // rzp.open();
-
-    localStorage.setItem(`paid_${course}`, "true");
-
-    if(course=="llb"){
-      window.location.href = `/`;
-    }else{
-      window.location.href = `/${course}`;
+    } catch (err) {
+      console.error(err);
+      alert("Error processing payment");
     }
+
+    setLoading(false);
   };
 
   return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
 
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
+      <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
 
-      <div className="w-full max-w-lg bg-white shadow-2xl rounded-2xl p-8 md:p-12 text-center">
-
-        {/* Icon */}
-        <div className="flex justify-center mb-6">
-          <div className="bg-indigo-100 p-4 rounded-full">
-            <Lock className="text-indigo-600" size={32}/>
-          </div>
-        </div>
-
-        {/* Heading */}
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
-          Unlock Full College Predictor
+        <h1 className="text-2xl font-bold mb-4">
+          Unlock Full Results 🔓
         </h1>
 
-        {/* Description */}
-        <p className="text-gray-600 mb-8 text-sm md:text-base">
-          Pay <span className="font-semibold text-gray-800">₹49</span> to view
-          all predicted colleges and download your detailed PDF report.
+        <p className="text-gray-600 mb-6">
+          Pay ₹49 to access complete college predictions
         </p>
 
-        {/* Features */}
-        <div className="text-left mb-8 space-y-3 text-gray-600 text-sm md:text-base">
-          <p>✔ View all predicted colleges</p>
-          <p>✔ Detailed admission probability</p>
-          <p>✔ Download complete PDF report</p>
-        </div>
-
-        {/* Button */}
         <button
           onClick={handlePayment}
-          className="w-full bg-indigo-600 hover:bg-indigo-700 transition text-white font-semibold py-3 rounded-lg text-lg shadow-md"
+          disabled={loading}
+          className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700"
         >
-          Pay ₹49 & Unlock
+          {loading ? "Processing..." : "Pay ₹49"}
         </button>
-
-        {/* Secure note */}
-        <p className="text-xs text-gray-400 mt-4">
-          Secure payment powered by Razorpay
-        </p>
 
       </div>
 

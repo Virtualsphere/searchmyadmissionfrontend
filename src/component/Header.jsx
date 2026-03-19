@@ -58,13 +58,7 @@ export default function Header() {
             {openDropdown === "counselling" && (
               <div className="absolute top-8 left-0 bg-white shadow-lg rounded-lg p-4 w-56">
                 <a href="/" className="block py-2 hover:text-blue-600">
-                  GGSIPU LLB Predictor
-                </a>
-                <a href="/bca/bba" className="block py-2 hover:text-blue-600">
-                  GGSIPU CET Predictor
-                </a>
-                <a href="/btech" className="block py-2 hover:text-blue-600">
-                  AKTU BTech Predictor
+                  Predictor
                 </a>
               </div>
             )}
@@ -133,9 +127,7 @@ export default function Header() {
 
             {openDropdown === "counselling" && (
               <div className="pl-4 mt-2 space-y-2">
-                <a href="/">GGSIPU LLB Predictor</a>
-                <a href="/bca/bba">GGSIPU CET Predictor</a>
-                <a href="/btech">AKTU BTech Predictor</a>
+                <a href="/">Predictor</a>
               </div>
             )}
           </div>
