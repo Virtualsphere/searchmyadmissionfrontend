@@ -24,6 +24,7 @@ export default function Unlock() {
           rank: Number(params.get("rank")),
           region: params.get("region"),
           category: params.get("category"),
+          amount: 49,
           payment: true
         })
       });
