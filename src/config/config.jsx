@@ -24,7 +24,7 @@ const config = {
     exam: "AKTU BTech Counselling",
     endpoint: "/btech",
     showRegion: true,
-    categories: ["OPEN", "OPEN(GIRL)", "ST", "ST(GIRL)"],
+    categories: ["OPEN", "OPEN(GIRL)", "ST", "ST(GIRL)", "OPEN(TF)", "EWS(OPEN)", "BC", "EWS(GL)", "BC(Girl)", "SC(Girl)", "SC", "EWS"],
     courses: [
         { label: "CSE", value: "Computer Science and Engineering" },
         { label: "CSE-AI", value: "Computer Science and Engineering (Artificial Intelligence)" },
