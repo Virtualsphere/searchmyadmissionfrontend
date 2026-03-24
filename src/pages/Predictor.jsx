@@ -148,8 +148,9 @@ export default function Predictor() {
                   <tr>
                     <th className="p-3 sm:p-4 text-left">College</th>
                     <th className="p-3 sm:p-4">Round</th>
-                    <th className="p-3 sm:p-4">Category</th>
-                    <th className="p-3 sm:p-4">Rank Range</th>
+                    <th className="p-3 sm:p-4">Admission Chance</th>
+                    <th className="p-3 sm:p-4">Teir</th>
+                    <th className="p-3 sm:p-4">ROI</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -157,8 +158,9 @@ export default function Predictor() {
                     <tr key={i} className="border-b hover:bg-blue-50 text-xs sm:text-sm">
                       <td className="p-3 sm:p-4 font-medium">{r.institute}</td>
                       <td className="p-3 sm:p-4">{r.round}</td>
-                      <td className="p-3 sm:p-4">{r.category}</td>
-                      <td className="p-3 sm:p-4">{r.minRank} - {r.maxRank}</td>
+                      <td className="p-3 sm:p-4">{r.probability}%</td>
+                      <td className="p-3 sm:p-4">{r.collegeTier}</td>
+                      <td className="p-3 sm:p-4">{r.allotmentConfidence}</td>
                     </tr>
                   ))}
                 </tbody>
