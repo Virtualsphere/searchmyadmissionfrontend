@@ -11,7 +11,6 @@ export default function Predictor() {
   const [email, setEmail] = useState("");
 
   const [results, setResults] = useState([]);
-  const [paid, setPaid] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const predict = async () => {
@@ -42,13 +41,22 @@ export default function Predictor() {
 
       const data = await res.json();
       setResults(data.results || []);
-      setPaid(data.paid || false);
     } catch (err) {
       console.error(err);
       alert("Something went wrong");
     }
 
     setLoading(false);
+  };
+
+  const userData = {
+    email,
+    exam: config[type].exam,
+    rank: Number(rank),
+    category,
+    course,
+    region,
+    type,
   };
 
   return (
@@ -148,9 +156,8 @@ export default function Predictor() {
                   <tr>
                     <th className="p-3 sm:p-4 text-left">College</th>
                     <th className="p-3 sm:p-4">Round</th>
-                    <th className="p-3 sm:p-4">Admission Chance</th>
-                    <th className="p-3 sm:p-4">Teir</th>
-                    <th className="p-3 sm:p-4">ROI</th>
+                    <th className="p-3 sm:p-4">Category</th>
+                    <th className="p-3 sm:p-4">Region</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -158,28 +165,12 @@ export default function Predictor() {
                     <tr key={i} className="border-b hover:bg-blue-50 text-xs sm:text-sm">
                       <td className="p-3 sm:p-4 font-medium">{r.institute}</td>
                       <td className="p-3 sm:p-4">{r.round}</td>
-                      <td className="p-3 sm:p-4">{r.probability}%</td>
-                      <td className="p-3 sm:p-4">{r.collegeTier}</td>
-                      <td className="p-3 sm:p-4">{r.allotmentConfidence}</td>
+                      <td className="p-3 sm:p-4">{r.category}%</td>
+                      <td className="p-3 sm:p-4">{r.region}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-
-              {!paid && results.length > 4 && (
-                <div className="absolute inset-0 backdrop-blur-[1px] flex flex-col items-center justify-center z-10 text-center p-4">
-                  <h3 className="text-base sm:text-lg font-semibold mb-2">🔒 Unlock Full Results</h3>
-                  <p className="text-xs sm:text-sm mb-4 text-gray-600">Get complete college list based on your rank</p>
-                  <button
-                    onClick={() => {
-                      window.location.href = `/unlock?type=${type}&rank=${rank}&category=${category}&region=${region}&course=${course}&exam=${config[type].exam}&email=${email}`;
-                    }}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm sm:text-base"
-                  >
-                    Pay ₹49
-                  </button>
-                </div>
-              )}
             </div>
 
             {/* CTA */}
@@ -189,6 +180,19 @@ export default function Predictor() {
                 <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold">Book Free Counselling</button>
                 <button className="border border-white px-6 py-2 rounded-lg">Apply Now</button>
               </div>
+            </div>
+
+            <div className="text-center mt-6">
+              <button
+                onClick={() => {
+                  localStorage.setItem("predictorData", JSON.stringify(userData));
+
+                  window.location.href = "/comparison";
+                }}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg"
+              >
+                Compare Top 5 Colleges → ₹499
+              </button>
             </div>
           </div>
         )}
