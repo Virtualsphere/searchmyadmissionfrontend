@@ -60,7 +60,7 @@ export default function ComparisonPage() {
       <div className="text-center">
         <div className="font-bold text-base">{instituteName}</div>
         {college.collegeTier && (
-          <div className="text-xs font-medium mt-0.5 text-gray-600">
+          <div className="text-xs font-medium mt-0.5 text-white">
             {college.collegeTier}
           </div>
         )}

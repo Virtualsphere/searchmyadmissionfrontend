@@ -106,11 +106,18 @@ export default function Predictor() {
                       {type === "btech" ? "Are you from UP Region?" : "Are you from Delhi Region?"}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-                      <label>
-                        <input type="radio" value="delhi" checked={region === "delhi"} onChange={(e) => setRegion(e.target.value)} /> Yes
+                      <label className="flex items-center gap-2">
+                        <input 
+                          type="radio" 
+                          value={type === "btech" ? "up" : "delhi"} 
+                          checked={region === (type === "btech" ? "up" : "delhi")} 
+                          onChange={(e) => setRegion(e.target.value)} 
+                        />
+                        <span>Yes</span>
                       </label>
-                      <label>
-                        <input type="radio" value="outside" checked={region === "outside"} onChange={(e) => setRegion(e.target.value)} /> No
+                      <label className="flex items-center gap-2">
+                        <input type="radio" value={type === "btech" ? "All India" : "outside"} checked={region === (type === "btech" ? "All India" : "outside")} onChange={(e) => setRegion(e.target.value)} /> 
+                        <span>No</span>
                       </label>
                     </div>
                   </div>
@@ -151,36 +158,65 @@ export default function Predictor() {
               </span>
             </div>
 
-            {/* Table */}
+            {/* Table with improved alignment */}
             <div className="bg-white rounded-xl shadow-lg overflow-x-auto border relative">
-              <table className="min-w-[600px] w-full">
+              <table className="min-w-[800px] w-full table-auto">
                 <thead className="bg-gray-100 text-gray-700 text-xs sm:text-sm">
                   <tr>
-                    <th className="p-3 sm:p-4 text-left">College</th>
-                    <th className="p-3 sm:p-4">Round</th>
-                    <th className="p-3 sm:p-4">Category</th>
-                    <th className="p-3 sm:p-4">Region</th>
+                    <th className="p-3 sm:p-4 text-left w-[45%]">College Name</th>
+                    <th className="p-3 sm:p-4 text-center w-[15%]">Round</th>
+                    <th className="p-3 sm:p-4 text-center w-[20%]">Category</th>
+                    <th className="p-3 sm:p-4 text-center w-[20%]">Region</th>
                   </tr>
                 </thead>
                 <tbody>
                   {results.map((r, i) => (
-                    <tr key={i} className="border-b hover:bg-blue-50 text-xs sm:text-sm">
-                      <td className="p-3 sm:p-4 font-medium">{r.institute}</td>
-                      <td className="p-3 sm:p-4">{r.round}</td>
-                      <td className="p-3 sm:p-4">{r.category}%</td>
-                      <td className="p-3 sm:p-4">{r.region}</td>
+                    <tr key={i} className="border-b hover:bg-blue-50 transition-colors">
+                      <td className="p-3 sm:p-4 align-middle text-left break-words whitespace-normal">
+                        <span className="font-medium text-gray-900">{r.institute}</span>
+                      </td>
+                      <td className="p-3 sm:p-4 align-middle text-center">
+                        <span className="inline-flex items-center justify-center px-2 py-1 rounded-md bg-gray-100 text-gray-800 font-medium">
+                          {r.round}
+                        </span>
+                      </td>
+                      <td className="p-3 sm:p-4 align-middle text-center">
+                        <span className="inline-flex items-center justify-center px-2 py-1 rounded-md bg-blue-50 text-blue-800 font-medium">
+                          {r.category}
+                        </span>
+                      </td>
+                      <td className="p-3 sm:p-4 align-middle text-center">
+                        <span className={`inline-flex items-center justify-center px-2 py-1 rounded-md font-medium ${
+                          r.region === 'HS' || r.region === 'Delhi' 
+                            ? 'bg-green-50 text-green-800' 
+                            : 'bg-orange-50 text-orange-800'
+                        }`}>
+                          {r.region}
+                        </span>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
 
+            {/* Table Footer - Optional */}
+            {results.length > 0 && (
+              <div className="mt-4 text-center text-sm text-gray-600">
+                Showing {results.length} college{results.length !== 1 ? 's' : ''} matching your criteria
+              </div>
+            )}
+
             {/* CTA */}
             <div className="bg-gradient-to-r from-blue-700 to-indigo-600 text-white p-6 sm:p-10 rounded-xl text-center shadow-lg mt-6">
               <h3 className="text-lg sm:text-xl font-semibold mb-2">Need Help with IPU Counselling?</h3>
               <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-4">
-                <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold">Book Free Counselling</button>
-                <button className="border border-white px-6 py-2 rounded-lg">Apply Now</button>
+                <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                  Book Free Counselling
+                </button>
+                <button className="border border-white px-6 py-2 rounded-lg hover:bg-white hover:text-blue-600 transition-colors">
+                  Apply Now
+                </button>
               </div>
             </div>
 
@@ -188,10 +224,9 @@ export default function Predictor() {
               <button
                 onClick={() => {
                   localStorage.setItem("predictorData", JSON.stringify(userData));
-
                   window.location.href = "/comparison";
                 }}
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg"
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
               >
                 Compare Top 5 Colleges → ₹499
               </button>
