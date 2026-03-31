@@ -96,7 +96,12 @@ export default function Predictor() {
                 <select className="w-full p-3 border rounded-lg" value={category} onChange={(e) => setCategory(e.target.value)}>
                   <option value="">Category</option>
                   {config[type].categories.map((c, i) => (
-                    <option key={i} value={c}>{c}</option>
+                    <option key={i} value={c}>
+                      {c} 
+                      {config[type].categoryDefinitions?.[c] && 
+                        ` - ${config[type].categoryDefinitions[c]}`
+                      }
+                    </option>
                   ))}
                 </select>
 

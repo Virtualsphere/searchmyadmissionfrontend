@@ -4,27 +4,62 @@ const config = {
     endpoint: "/llb",
     courses: ["B.A.-L.L.B.", "B.B.A.-L.L.B."],
     showRegion: true,
-    categories: ["general", "obc", "sc", "st", "ews"]
+    categories: ["general", "obc", "sc", "st", "ews"],
+    categoryDefinitions: {
+      "general": "General Category",
+      "obc": "Other Backward Classes",
+      "sc": "Scheduled Caste",
+      "st": "Scheduled Tribe",
+      "ews": "Economically Weaker Section"
+    }
   },
   bca: {
     exam: "GGSIPU CET Counselling",
     endpoint: "/bca",
     courses: ["Bachelor of Computer Applications"],
     showRegion: true,
-    categories: ["general", "obc", "sc", "st", "ews"]
+    categories: ["general", "obc", "sc", "st", "ews"],
+    categoryDefinitions: {
+      "general": "General Category",
+      "obc": "Other Backward Classes",
+      "sc": "Scheduled Caste",
+      "st": "Scheduled Tribe",
+      "ews": "Economically Weaker Section"
+    }
   },
   bba: {
     exam: "GGSIPU CET Counselling",
     endpoint: "/bba",
     courses: ["Bachelor of Business Administration"],
     showRegion: true,
-    categories: ["general", "obc", "sc", "st", "ews"]
+    categories: ["general", "obc", "sc", "st", "ews"],
+    categoryDefinitions: {
+      "general": "General Category",
+      "obc": "Other Backward Classes",
+      "sc": "Scheduled Caste",
+      "st": "Scheduled Tribe",
+      "ews": "Economically Weaker Section"
+    }
   },
   btech: {
     exam: "AKTU BTech Counselling",
     endpoint: "/btech",
     showRegion: true,
     categories: ["OPEN", "OPEN(GIRL)", "ST", "ST(GIRL)", "OPEN(TF)", "EWS(OPEN)", "BC", "EWS(GL)", "BC(Girl)", "SC(Girl)", "SC", "EWS"],
+    categoryDefinitions: {
+      "OPEN": "All India General Candidates",
+      "OPEN(GIRL)": "UP OPEN Girl",
+      "ST": "UP ST Candidates",
+      "ST(GIRL)": "UP ST Girl Candidates",
+      "OPEN(TF)": "UP Open Tuition Fee Waiver",
+      "EWS(OPEN)": "UP EWS Candidates",
+      "BC": "UP BC Candidates",
+      "EWS(GL)": "UP EWS Girl Candidates",
+      "BC(Girl)": "UP BC Girl Candidates",
+      "SC(Girl)": "UP SC Girl Candiates",
+      "SC": "UP SC Candiates",
+      "EWS": "All India EWS Candidates"
+    },
     courses: [
         { label: "CSE", value: "Computer Science and Engineering" },
         { label: "CSE-AI", value: "Computer Science and Engineering (Artificial Intelligence)" },
