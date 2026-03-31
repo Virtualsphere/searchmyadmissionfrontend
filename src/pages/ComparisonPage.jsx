@@ -255,6 +255,14 @@ export default function ComparisonPage() {
           <p className="text-gray-800 leading-relaxed text-sm">{aiVerdict}</p>
         </div>
       )}
+
+      <div className="bg-gradient-to-r from-blue-700 to-indigo-600 text-white p-6 sm:p-10 rounded-xl text-center shadow-lg mt-6">
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Need Help with IPU Counselling?</h3>
+              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-4">
+                <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold">Book Free Counselling</button>
+              <button className="border border-white px-6 py-2 rounded-lg">Apply Now</button>
+            </div>
+      </div>
     </div>
   );
 }
