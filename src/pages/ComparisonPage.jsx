@@ -196,6 +196,13 @@ export default function ComparisonPage() {
                 <td key={idx} className="p-3 text-center">{college.brandPreference}</td>
               ))}
             </tr>
+            {/* Final Score */}
+            <tr className="hover:bg-gray-50 transition">
+              <td className="p-3 font-medium bg-gray-50">Final Score</td>
+              {data.map((college, idx) => (
+                <td key={idx} className="p-3 text-center">{college.finalScore}</td>
+              ))}
+            </tr>
             {/* Risk vs Reward */}
             <tr className="hover:bg-gray-50 transition">
               <td className="p-3 font-medium bg-gray-50">Risk vs Reward</td>
