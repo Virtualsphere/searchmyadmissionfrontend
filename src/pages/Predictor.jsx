@@ -102,7 +102,9 @@ export default function Predictor() {
 
                 {config[type].showRegion && (
                   <div>
-                    <p className="mb-2 text-sm sm:text-base">Are you from Delhi Region?</p>
+                    <p className="mb-2 text-sm sm:text-base">
+                      {type === "btech" ? "Are you from UP Region?" : "Are you from Delhi Region?"}
+                    </p>
                     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
                       <label>
                         <input type="radio" value="delhi" checked={region === "delhi"} onChange={(e) => setRegion(e.target.value)} /> Yes

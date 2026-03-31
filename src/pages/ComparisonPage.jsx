@@ -7,8 +7,12 @@ export default function ComparisonPage() {
   const [paid, setPaid] = useState(false);
   const [loading, setLoading] = useState(true);
   const [bestFit, setBestFit] = useState(null);
+  const [user, setUser] = useState(null);
 
-  const user = JSON.parse(localStorage.getItem("predictorData"));
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("predictorData"));
+    setUser(storedUser);
+  }, []);
 
   useEffect(() => {
     if (!user) return;
