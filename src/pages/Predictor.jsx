@@ -59,6 +59,11 @@ export default function Predictor() {
     type,
   };
 
+  const goToComparison = () => {
+    localStorage.setItem("predictorData", JSON.stringify(userData));
+    window.location.href = "/unlock";
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navbar */}
@@ -82,18 +87,36 @@ export default function Predictor() {
             {/* Form */}
             <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-8 border border-gray-100">
               <div className="space-y-4">
-                <select className="w-full p-3 border rounded-lg" value={type} onChange={(e) => { setType(e.target.value); setCourse(""); }}>
+                <select 
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  value={type} 
+                  onChange={(e) => { setType(e.target.value); setCourse(""); }}
+                >
                   <option value="btech">BTech</option>
                   <option value="bca">BCA</option>
                   <option value="bba">BBA</option>
                   <option value="llb">LLB</option>
                 </select>
 
-                <input className="w-full p-3 border rounded-lg" value={config[type].exam} disabled />
+                <input 
+                  className="w-full p-3 border rounded-lg bg-gray-100 cursor-not-allowed" 
+                  value={config[type].exam} 
+                  disabled 
+                />
 
-                <input className="w-full p-3 border rounded-lg" type="number" placeholder="Enter Rank" value={rank} onChange={(e) => setRank(e.target.value)} />
+                <input 
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  type="number" 
+                  placeholder="Enter Rank" 
+                  value={rank} 
+                  onChange={(e) => setRank(e.target.value)} 
+                />
 
-                <select className="w-full p-3 border rounded-lg" value={category} onChange={(e) => setCategory(e.target.value)}>
+                <select 
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  value={category} 
+                  onChange={(e) => setCategory(e.target.value)}
+                >
                   <option value="">Category</option>
                   {config[type].categories.map((c, i) => (
                     <option key={i} value={c}>
@@ -111,7 +134,7 @@ export default function Predictor() {
                       {type === "btech" ? "Are you from UP Region?" : "Are you from Delhi Region?"}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-                      <label className="flex items-center gap-2">
+                      <label className="flex items-center gap-2 cursor-pointer">
                         <input 
                           type="radio" 
                           value={type === "btech" ? "up" : "delhi"} 
@@ -120,15 +143,24 @@ export default function Predictor() {
                         />
                         <span>Yes</span>
                       </label>
-                      <label className="flex items-center gap-2">
-                        <input type="radio" value={type === "btech" ? "All India" : "outside"} checked={region === (type === "btech" ? "All India" : "outside")} onChange={(e) => setRegion(e.target.value)} /> 
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input 
+                          type="radio" 
+                          value={type === "btech" ? "All India" : "outside"} 
+                          checked={region === (type === "btech" ? "All India" : "outside")} 
+                          onChange={(e) => setRegion(e.target.value)} 
+                        /> 
                         <span>No</span>
                       </label>
                     </div>
                   </div>
                 )}
 
-                <select className="w-full p-3 border rounded-lg" value={course} onChange={(e) => setCourse(e.target.value)}>
+                <select 
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  value={course} 
+                  onChange={(e) => setCourse(e.target.value)}
+                >
                   <option value="">Select Course</option>
                   {config[type].courses.map((c, i) => (
                     <option key={i} value={typeof c === "string" ? c : c.value}>
@@ -137,9 +169,22 @@ export default function Predictor() {
                   ))}
                 </select>
 
-                <input className="w-full p-3 border rounded-lg" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input 
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  placeholder="Enter Email" 
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)} 
+                />
 
-                <button onClick={predict} className="w-full bg-yellow-400 hover:bg-yellow-500 py-3 rounded-lg font-semibold shadow">
+                <button 
+                  onClick={predict} 
+                  disabled={loading}
+                  className={`w-full py-3 rounded-lg font-semibold shadow transition-all ${
+                    loading 
+                      ? "bg-gray-400 cursor-not-allowed" 
+                      : "bg-yellow-400 hover:bg-yellow-500 active:scale-95"
+                  }`}
+                >
                   {loading ? "Predicting..." : "Predict My Colleges"}
                 </button>
               </div>
@@ -205,7 +250,7 @@ export default function Predictor() {
               </table>
             </div>
 
-            {/* Table Footer - Optional */}
+            {/* Table Footer */}
             {results.length > 0 && (
               <div className="mt-4 text-center text-sm text-gray-600">
                 Showing {results.length} college{results.length !== 1 ? 's' : ''} matching your criteria
@@ -214,27 +259,28 @@ export default function Predictor() {
 
             {/* CTA */}
             <div className="bg-gradient-to-r from-blue-700 to-indigo-600 text-white p-6 sm:p-10 rounded-xl text-center shadow-lg mt-6">
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Unlock Full Analysis</h3>
+              <p className="text-sm text-blue-100 mb-4">Get AI-powered comparisons, seat security analysis, and personalized recommendations</p>
+              <button 
+                onClick={goToComparison}
+                className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
+              >
+                <span>🔓</span>
+                Compare Top 5 Colleges — ₹1
+              </button>
+            </div>
+
+            {/* Optional: Free Counselling */}
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 text-green-900 p-6 sm:p-8 rounded-xl text-center shadow mt-6 border border-green-200">
               <h3 className="text-lg sm:text-xl font-semibold mb-2">Need Help with IPU Counselling?</h3>
               <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-4">
-                <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                <button className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors">
                   Book Free Counselling
                 </button>
-                <button className="border border-white px-6 py-2 rounded-lg hover:bg-white hover:text-blue-600 transition-colors">
+                <button className="border-2 border-green-600 text-green-600 px-6 py-2 rounded-lg font-semibold hover:bg-green-50 transition-colors">
                   Apply Now
                 </button>
               </div>
-            </div>
-
-            <div className="text-center mt-6">
-              <button
-                onClick={() => {
-                  localStorage.setItem("predictorData", JSON.stringify(userData));
-                  window.location.href = "/comparison";
-                }}
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
-              >
-                Compare Top 5 Colleges → ₹499
-              </button>
             </div>
           </div>
         )}
